@@ -1,0 +1,5 @@
+# ignore all files in these directories
+.conda/
+.venv/
+__pycache__/
+assets/
