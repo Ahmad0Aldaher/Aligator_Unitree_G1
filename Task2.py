@@ -399,58 +399,60 @@ def fdisplay():
 fdisplay()
 
  
-
+print(len(results.xs.tolist()))
 # Extract joint positions, velocities, and torques
 joint_positions = [x[:nq] for x in results.xs.tolist()]  # Joint angular positions
 joint_velocities = [x[nq:] for x in results.xs.tolist()]  # Joint angular velocities
 joint_torques = results.us.tolist()  # Joint torques
 
+
+
 # Time vector for plotting
 time_vector = np.arange(0, len(joint_positions) * dt, dt)
 
-# Plot Joint Angular Positions
-plt.figure(figsize=(12, 8))
-for i in range(nq):
-    plt.plot(time_vector, [q[i] for q in joint_positions], label=f'Joint {i+1}')
-plt.title('Joint Angular Positions')
-plt.xlabel('Time (s)')
-plt.ylabel('Position (rad)')
-plt.legend()
-plt.grid(True)
-plt.show()
+# # Plot Joint Angular Positions
+# plt.figure(figsize=(12, 8))
+# for i in range(nq):
+#     plt.plot(time_vector, [q[i] for q in joint_positions], label=f'Joint {i+1}')
+# plt.title('Joint Angular Positions')
+# plt.xlabel('Time (s)')
+# plt.ylabel('Position (rad)')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
 
-# Plot Joint Angular Velocities
-plt.figure(figsize=(12, 8))
-for i in range(nv):
-    plt.plot(time_vector, [v[i] for v in joint_velocities], label=f'Joint {i+1}')
-plt.title('Joint Angular Velocities')
-plt.xlabel('Time (s)')
-plt.ylabel('Velocity (rad/s)')
-plt.legend()
-plt.grid(True)
-plt.show()
+# # Plot Joint Angular Velocities
+# plt.figure(figsize=(12, 8))
+# for i in range(nv):
+#     plt.plot(time_vector, [v[i] for v in joint_velocities], label=f'Joint {i+1}')
+# plt.title('Joint Angular Velocities')
+# plt.xlabel('Time (s)')
+# plt.ylabel('Velocity (rad/s)')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
 
-# Plot Joint Torques
-plt.figure(figsize=(12, 8))
-for i in range(nu):
-    plt.plot(time_vector[:-1], [u[i] for u in joint_torques], label=f'Joint {i+1}')
-plt.title('Joint Torques')
-plt.xlabel('Time (s)')
-plt.ylabel('Torque (Nm)')
-plt.legend()
-plt.grid(True)
-plt.show()
+# # Plot Joint Torques
+# plt.figure(figsize=(12, 8))
+# for i in range(nu):
+#     plt.plot(time_vector[:-1], [u[i] for u in joint_torques], label=f'Joint {i+1}')
+# plt.title('Joint Torques')
+# plt.xlabel('Time (s)')
+# plt.ylabel('Torque (Nm)')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
 
  
-# Define joint groups (example for a humanoid robot)
+
 left_leg_joints = range(7, 13)  # Indices for leg joints
 right_leg_joints = range(13, 19)  # Indices for leg joints
-waist_joint = [19]# Index for waist joint
 
 
-# Plot Joint Angular Positions (grouped)
+
+
 plt.figure(figsize=(12, 8))
-plt.subplot(3, 1, 1)
+plt.subplot(2, 1, 1)
 for i in left_leg_joints:
     plt.plot(time_vector, [q[i] for q in joint_positions], label=f'Joint {i+1}')
 plt.title('Left Leg Joint Angular Positions')
@@ -459,21 +461,65 @@ plt.ylabel('Position (rad)')
 plt.legend()
 plt.grid(True)
 
-plt.subplot(3, 1, 2)
+plt.subplot(2, 1, 2)
 for i in right_leg_joints:
     plt.plot(time_vector, [q[i] for q in joint_positions], label=f'Joint {i+1}')
-plt.title('Arm Joint Angular Positions')
+plt.title('Right Leg Joint Angular Positions')
 plt.xlabel('Time (s)')
 plt.ylabel('Position (rad)')
 plt.legend()
 plt.grid(True)
 
-plt.subplot(3, 1, 3)
-for i in waist_joint:
-    plt.plot(time_vector, [q[i] for q in joint_positions], label=f'Joint {i+1}')
-plt.title('Waist Joint Angular Position')
+plt.tight_layout()
+plt.show()
+
+
+plt.figure(figsize=(12, 8))
+plt.subplot(2, 1, 1)
+for i in left_leg_joints:
+    plt.plot(time_vector, [v[i-1] for v in joint_velocities], label=f'Joint {i+1}')
+plt.title('Left Leg Joint Angular Velocities')
 plt.xlabel('Time (s)')
-plt.ylabel('Position (rad)')
+plt.ylabel('Velocity (rad/s)')
+plt.legend()
+plt.grid(True)
+
+plt.subplot(2, 1, 2)
+for i in right_leg_joints:
+    plt.plot(time_vector, [v[i-1] for v in joint_velocities], label=f'Joint {i+1}')
+plt.title('Right Leg Joint Angular Velocities')
+plt.xlabel('Time (s)')
+plt.ylabel('Velocity (rad/s)')
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+
+
+
+
+left_leg_torques= range(0, 6)  # Indices for leg joints
+right_leg_torques = range(6, 12)  # Indices for leg joints
+
+
+
+plt.figure(figsize=(12, 8))
+plt.subplot(2, 1, 1)
+for i in left_leg_torques:
+    plt.plot(time_vector, [u[i] for u in joint_velocities], label=f'Joint {i+1}')
+plt.title('Left Leg Joint Torques')
+plt.xlabel('Time (s)')
+plt.ylabel('Torque (Nm)')
+plt.legend()
+plt.grid(True)
+
+plt.subplot(2, 1, 2)
+for i in right_leg_torques:
+    plt.plot(time_vector, [u[i] for u in joint_velocities], label=f'Joint {i+1}')
+plt.title('Right Leg Joint Torques')
+plt.xlabel('Time (s)')
+plt.ylabel('Torque (Nm)')
 plt.legend()
 plt.grid(True)
 
