@@ -393,9 +393,6 @@ def fdisplay():
     for _ in range(3):
         robot.play(qs, dt)
         time.sleep(0.5)
-    # robot.play(qs, dt)
-    # time.sleep(0.5)
- 
 fdisplay()
 
  
@@ -445,8 +442,8 @@ time_vector = np.arange(0, len(joint_positions) * dt, dt)
 
  
 
-left_leg_joints = range(7, 13)  # Indices for leg joints
-right_leg_joints = range(13, 19)  # Indices for leg joints
+left_leg_joints = range(7, 13) 
+right_leg_joints = range(13, 19)   
 
 
 
@@ -499,9 +496,8 @@ plt.show()
 
 
 
-left_leg_torques= range(0, 6)  # Indices for leg joints
-right_leg_torques = range(6, 12)  # Indices for leg joints
-
+left_leg_torques= range(0, 6)  
+right_leg_torques = range(6, 12) 
 
 
 plt.figure(figsize=(12, 8))

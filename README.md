@@ -11,6 +11,6 @@ Modeling the walking behavior of the Unitree G1 robot using the Aligator traject
 * [aligator](https://github.com/Simple-Robotics/aligator)
 
 ## Task 
-This repository  uses  Aligator trajectory optimization library to desgin following sequence movement fro Unitree G1 robot: 4 steps, squat, 2 steps, stance.
+This repository  uses  Aligator trajectory optimization library to desgin following sequence movement for Unitree G1 robot: 4 steps, squat, 2 steps, stance.
 
 ![alt text](figs/res.gif) 
